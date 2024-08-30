@@ -8,7 +8,7 @@ export const Login = () => {
     return  <div className="flex items-center justify-center bg-[#020817] h-screen">
       
         <div className="items-center justify-center flex w-full mt-20">
-                <div className="w-3/12 p-2 rounded-lg h-full">
+                <div className=" p-2 rounded-lg h-full w-96">
                     <div className="p-2">
                         <p className="text-xl text-white font-semibold">Login to your Rebike Account</p>
                     </div>

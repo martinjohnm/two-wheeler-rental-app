@@ -8,8 +8,8 @@ export const SignUp = () => {
     return  <div className="flex items-center justify-center bg-[#020817] h-screen">
       
         <div className="items-center justify-center flex w-full mt-20">
-                <div className="w-3/12 rounded-lg h-full">
-                    <div className="p-2">
+                <div className=" rounded-lg h-full">
+                    <div className="p-2 w-96">
                         <p className="text-xl text-white font-semibold">Create Your Rebike Account</p>
                     </div>
                     
@@ -20,7 +20,7 @@ export const SignUp = () => {
                     
                     <div className="p-2 flex items-center justify-center">
                         <button className="bg-blue-800 text-white h-full w-full rounded-lg p-2">
-                            Login
+                            Sign Up
                         </button>
                     </div>
                     <div className="p-2 text-white">
