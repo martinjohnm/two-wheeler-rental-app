@@ -3,7 +3,7 @@
 
 export const Hero = () => {
     return (
-    <div className="max-w-7xl mx-auto container grid md:grid-cols-2 grid-cols-1 gap-2 mt-10">
+    <div className="max-w-7xl mx-auto container grid md:grid-cols-2 grid-cols-1 p-6">
         <div className="items-center justify-center p-6 mt-10">
             <div className="text-orange-600 flex justify-center text-center">
                 <p>WELCOME TO REBIKE</p>
@@ -21,7 +21,7 @@ export const Hero = () => {
         </div>
         <div className="flex items-center justify-center">
             <div className="bg-green-200">
-                <img className="w-[600px]" src="hero.png" alt="" />
+                <img className="" src="hero.png" alt="" />
             </div>
         </div>
     </div>

@@ -6,9 +6,9 @@ import { FaBicycle } from "react-icons/fa";
 
 export const Steps = () => {
     return (
-        <div className="max-w-7xl mx-auto container ">
+        <div className="max-w-7xl mx-auto container p-6">
             
-            <div className="justify-center items-center mt-6">
+            <div className="justify-center items-center">
                 <div className="text-orange-600 flex justify-center items-center">
                     HOW IT WORKS
                 </div>
@@ -32,7 +32,7 @@ export const Steps = () => {
                     </div>
                     
                     <div className="font-serif flex justify-center text-center mt-2">
-                            hai
+                            Select your favourite bike 
                     </div>
                 
                 </div>
@@ -48,7 +48,7 @@ export const Steps = () => {
                     </div>
                     
                     <div className="font-serif flex justify-center text-center mt-2">
-                            hai
+                            Set a date using slot selector
                     </div>
                 
                 </div>
@@ -64,7 +64,7 @@ export const Steps = () => {
                     </div>
                     
                     <div className="font-serif flex justify-center text-center mt-2">
-                            hai
+                            Pick up your time on the permitted time
                     </div>
                 
                 </div>

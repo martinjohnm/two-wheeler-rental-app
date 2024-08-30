@@ -6,7 +6,7 @@ import { Steps } from "../components/Steps"
 
 
 export const Home = () => {
-    return <div>
+    return <div className="bg-slate-100">
     
         <Navbar/>
         <Hero/>
