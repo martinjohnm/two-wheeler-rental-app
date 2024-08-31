@@ -11,9 +11,9 @@ export const Home = () => {
     
         <Navbar/>
         <Hero/>
-        <button onClick={() => toast.success('My first toast')} className="bg-red-300 rounded-sm p-2">
-        Give me a toast
-        </button>
+            <button onClick={() => toast.success('My first toast')} className="bg-red-300 rounded-sm p-2">
+            Give me a toast
+            </button>
         <Steps/>
         
     

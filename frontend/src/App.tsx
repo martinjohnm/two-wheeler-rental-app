@@ -5,15 +5,17 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
 import { Toaster } from 'sonner'
+import { Bikes } from './pages/Bikes'
 
 function App() {
   return (
     <BrowserRouter>
-      <Toaster className='bg-red-500' position='top-right' richColors/>
+      <Toaster position='top-right' richColors/>
       <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/bikes' element={<Bikes/>}/>
       </Routes>
     </BrowserRouter>
   )
