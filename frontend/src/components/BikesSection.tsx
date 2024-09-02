@@ -12,11 +12,5 @@ export const BikesSection = () => {
         <BikesCard/>
         <BikesCard/>
         <BikesCard/>
-        <BikesCard/>
-        <BikesCard/>
-        <BikesCard/>
-        <BikesCard/>
-        <BikesCard/>
-        <BikesCard/>
     </div>
 }

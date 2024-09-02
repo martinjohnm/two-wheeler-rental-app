@@ -2,29 +2,43 @@
 import { Request, Response } from "express";
 import prisma from "../db";
 import bcrypt from "bcrypt"
+import { userLoginInput, userSignupinput } from "@martinjohnm/rebike-common";
 
 export const signup = async (req : Request,res : Response) => {
 
     try {
-        const {fullName,email, password, confirmPassword} = req.body;
+        const body = req.body
+        const response = userSignupinput.safeParse(body);
+        if (!response.success) {
+            res.status(400).json({
+                error : response.error,
+                success : false,
+                message : "Signup failed"
+            })
+            return
+        }
+
+        const {password, confirmPassword,email, fullName} = body
 
         if (password !== confirmPassword) {
             return res.status(400).json(
-                {error : "Passwords don't match",
-                 success : false}
-                )
+                {
+                    success : false,
+                    error : "Passwords don't match"
+                })
         }
 
         const existingUser = await prisma.user.findFirst({
             where : {
-                email : email
+                email
             }
         })
 
         if (existingUser){
             return res.status(400).json(
-                {error : "Username already exists",
-                    success : false
+                {
+                    success : false,
+                    error : "Username already registered"
                 })
         }
 
@@ -39,10 +53,14 @@ export const signup = async (req : Request,res : Response) => {
         })
 
         res.status(200).json({
-            id : user.id,
-            fullName : user.fullName,
-            email : user.email,
-            success : true
+            data : {
+                id : user.id,
+                fullName : user.fullName,
+                email : user.email
+            },
+
+            success : true,
+            message : "User created successfully!"
         })
       
     } catch(error) {
@@ -51,10 +69,11 @@ export const signup = async (req : Request,res : Response) => {
         else message = String(error)
         console.log("Error during signup",  message); 
         res.status(500).json(
-            {error : "Internal server error",
-             success : false
-            }
-        )
+            {
+                success : false,
+                error : "Internal server error"
+            })
+        
     }
 }
 
@@ -72,16 +91,21 @@ export const login = async (req : Request, res : Response) => {
 
         if(!user || !isPasswordCorrect) {
             return res.status(400).json(
-            {error : "Invalid password",
-             success : false
+            {
+                success : false,
+                error : "Invalid credentials"
             })
         }
 
         res.status(200).json({
-            id : user.id,
-            fullName : user.fullName,
-            email : user.email,
-            success : true
+            success : true,
+            message : "Login successful!",
+            data : {
+                id : user.id,
+                fullName : user.fullName,
+                email : user.email
+            }
+            
         })
 
 
@@ -91,16 +115,10 @@ export const login = async (req : Request, res : Response) => {
         else message = String(error)
         console.log("Error during login",  message); 
         res.status(500).json(
-            {error : "Internal server error",
-             success : false
+            {
+                error : "Internal server error",
+                success : false
             }
         )
     }
-}
-
-export const test = async (req : Request, res : Response) => {
-
-    res.status(200).json({
-        success : true
-    })
 }

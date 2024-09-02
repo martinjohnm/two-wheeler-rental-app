@@ -1,7 +1,6 @@
 
 
 
-
 export const BikesCard = () => {
     return <div className="bg-green-400 h-96 w-auto items-center p-4 justify-center">
         <div className="text-center mt-8">

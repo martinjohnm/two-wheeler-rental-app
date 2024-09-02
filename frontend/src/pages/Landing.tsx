@@ -4,7 +4,7 @@ import { Steps } from "../components/Steps"
 import { toast } from "sonner"
 
 
-export const Home = () => {
+export const Landing = () => {
 
    
     return <div className="bg-slate-100">
