@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import prisma from "../db";
 import bcrypt from "bcrypt"
 import { userLoginInput, userSignupinput } from "@martinjohnm/rebike-common";
+import { generateTokenAndSetCookie, JWT_COOKIE_TOKEN } from "../utils/generateToken";
 
 export const signup = async (req : Request,res : Response) => {
 
@@ -44,19 +45,20 @@ export const signup = async (req : Request,res : Response) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await prisma.user.create({
+        const newUser = await prisma.user.create({
             data : {
                 email,
                 fullName,
                 password : hashedPassword
             }
         })
-
+        const token = generateTokenAndSetCookie(String(newUser.id), res);
         res.status(200).json({
             data : {
-                id : user.id,
-                fullName : user.fullName,
-                email : user.email
+                id : newUser.id,
+                fullName : newUser.fullName,
+                email : newUser.email,
+                token 
             },
 
             success : true,
@@ -80,7 +82,17 @@ export const signup = async (req : Request,res : Response) => {
 
 export const login = async (req : Request, res : Response) => {
     try {
-        const {email, password} = req.body;
+        const body = req.body
+        const response = userLoginInput.safeParse(body);
+        if (!response.success) {
+            res.status(400).json({
+                error : response.error,
+                success : false,
+                message : "Signup failed"
+            })
+            return
+        }
+        const {email, password} = body
 
         const user = await prisma.user.findFirst({
             where : {
@@ -97,13 +109,16 @@ export const login = async (req : Request, res : Response) => {
             })
         }
 
+        const token = generateTokenAndSetCookie(String(user.id), res);
+
         res.status(200).json({
             success : true,
             message : "Login successful!",
             data : {
                 id : user.id,
                 fullName : user.fullName,
-                email : user.email
+                email : user.email,
+                token
             }
             
         })
@@ -120,5 +135,29 @@ export const login = async (req : Request, res : Response) => {
                 success : false
             }
         )
+    }
+}
+
+export const logout = (req : Request,res : Response) => {
+    try {
+
+        res.clearCookie(JWT_COOKIE_TOKEN)
+
+        res.status(200).json(
+            {message : "Logged out successfully",
+             success : true,
+            })
+        
+
+    } catch(error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.log("Error during logout",  message); 
+        res.status(500).json(
+            {
+                error : "Internal server error",
+                success : false
+            })
     }
 }
