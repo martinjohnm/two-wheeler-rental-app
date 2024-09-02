@@ -19,12 +19,23 @@ model User {
   email      String   @unique
   password   String
   fullName   String
+  isAdmin    Boolean  @default(false)
+}
+
+
+
+model Company {
+  id         Int      @id @default(autoincrement())
+  title      String @unique
+  country    String    
+  bike       Bike[]
 }
 
 model Bike {
   id         Int      @id @default(autoincrement())
-  company    String 
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade) 
+  companyId  Int 
   model      Int
-  price      String
-
+  price      Int   
+  title      String
 }

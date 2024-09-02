@@ -4,7 +4,9 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 
-import authRoutes from "./routes/auth"
+import authRoutes from "./routes/user/auth"
+import bikesRoutes from "./routes/admin/bikes"
+import adminAuthRoutes from "./routes/admin/auth"
 
 dotenv.config();
 
@@ -22,7 +24,12 @@ app.use(cors({
 }))
 app.use(cookieParser())
 
+// user routes
 app.use("/api/auth", authRoutes)
+
+// admin routes
+app.use("/api/admin/bikes", bikesRoutes)
+app.use("/api/admin/auth", adminAuthRoutes)
 
 app.listen(PORT, () => {
 

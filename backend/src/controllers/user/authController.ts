@@ -1,9 +1,9 @@
 
 import { Request, Response } from "express";
-import prisma from "../db";
+import prisma from "../../db";
 import bcrypt from "bcrypt"
 import { userLoginInput, userSignupinput } from "@martinjohnm/rebike-common";
-import { generateTokenAndSetCookie, JWT_COOKIE_TOKEN } from "../utils/generateToken";
+import { generateTokenAndSetCookie, JWT_COOKIE_TOKEN } from "../../utils/generateToken";
 
 export const signup = async (req : Request,res : Response) => {
 

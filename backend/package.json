@@ -19,7 +19,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@martinjohnm/rebike-common": "^1.0.0",
+    "@martinjohnm/rebike-common": "^1.0.6",
     "@prisma/client": "^5.19.0",
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
