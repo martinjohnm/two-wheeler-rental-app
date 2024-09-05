@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ========= user schema ================================================================
 
 model User {
   id         Int      @id @default(autoincrement())
@@ -20,23 +21,85 @@ model User {
   password   String
   fullName   String
   isAdmin    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  bookings   Booking[]
+  orders     Order[]
 }
 
 
+// ========= Bike and company schema  ===================================================
 
 model Company {
   id         Int      @id @default(autoincrement())
   title      String @unique
   country    String    
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
   bike       Bike[]
 }
 
 model Bike {
   id         Int      @id @default(autoincrement())
-  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade) 
   companyId  Int 
   model      Int
   price      Int   
   title      String
   image      String @default("")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade) 
+  bookings   Booking[]
+}
+
+// ========= Slot schema =================================================================
+
+model Slot {
+  id         Int       @id @default(autoincrement())
+  startTime  DateTime
+  endTime    DateTime
+  isBooked   Boolean   @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  bookings   Booking[]
+}
+
+model Booking {
+  id        Int   @id @default(autoincrement())
+  userId    Int
+  bikeId    Int
+  slotId    Int
+  status    BookingStatus
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  bike      Bike     @relation(fields: [bikeId], references: [id])
+  slot      Slot     @relation(fields: [slotId], references: [id])
+  order     Order?
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  bookingId Int   @unique
+  userId    Int
+  amount    Float
+  status    OrderStatus
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+}
+
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  REFUNDED
+  FAILED
 }
