@@ -38,4 +38,5 @@ model Bike {
   model      Int
   price      Int   
   title      String
+  image      String @default("")
 }

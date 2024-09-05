@@ -5,7 +5,7 @@
 
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { JWT_COOKIE_TOKEN } from "../../utils/generateToken";
+import { JWT_COOKIE_TOKEN } from "../../utils/jwt-token-generater/generateToken";
 import prisma from "../../db";
 import { JwtPayloadInterface } from "../../types/user/userTypes";
 

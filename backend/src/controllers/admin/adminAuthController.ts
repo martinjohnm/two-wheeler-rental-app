@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import prisma from "../../db";
 import bcrypt from "bcrypt"
 import { userLoginInput, userSignupinput } from "@martinjohnm/rebike-common";
-import { generateTokenAndSetCookieAdmin, JWT_COOKIE_TOKEN_ADMIN } from "../../utils/generateToken";
+import { generateTokenAndSetCookieAdmin, JWT_COOKIE_TOKEN_ADMIN } from "../../utils/jwt-token-generater/generateToken";
 
 export const signup = async (req : Request,res : Response) => {
 

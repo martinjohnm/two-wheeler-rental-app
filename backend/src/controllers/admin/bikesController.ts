@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import prisma from "../../db"
 import { bikeAddInput, bikeUpdateInput, companyAddInput } from "@martinjohnm/rebike-common"
-
+import { uploadImage } from "../../utils/cloudinary/cloudinary_uploader"
 
 // Bike CRUD Operation Indivudual
 
@@ -21,13 +21,17 @@ export const add_bike = async (req : Request,res : Response) => {
             return
         }
 
-        const {model, price, title} =  body;
 
+        if (body.image) {
+            const imagee = "/home/martin-john-m/Videos/aaaadevssprojeccts/two-wheeler-app-node/backend/src/media/r15.png"
+            const test = await uploadImage(imagee)
+            body.image = test
+        }
+
+      
         const bike = await prisma.bike.create({
             data : {
-                model,
-                price,
-                title,
+                ...body,
                 company : {
                     connect : {id : Number(companyId)}
                 }
@@ -116,9 +120,7 @@ export const update_bike = async (req : Request,res : Response) => {
                 id : bikeId
             }, 
             data : {
-                model,
-                price,
-                title,
+                ...body,
                 company : {
                     connect : {id :  companyId}
                 }

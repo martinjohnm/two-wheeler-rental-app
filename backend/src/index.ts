@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+
 app.use(express())
 app.use(express.json()) // to parse incoming requests with JSON Payloads( from req.body )
 app.use(cors({
@@ -23,7 +24,6 @@ app.use(cors({
     credentials : true,
 }))
 app.use(cookieParser())
-
 // user routes
 app.use("/api/auth", authRoutes)
 
