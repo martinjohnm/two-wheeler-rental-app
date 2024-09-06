@@ -19,7 +19,8 @@ export const userLoginInput = z.object({
 export const bikeAddInput = z.object({
     model : z.number().min(1, {message : "Model Year cannot be empty"}),
     price : z.number().min(1, {message : "Price cannot be empty"}),
-    title : z.string().min(1, {message: "Title cannot be empty"})
+    title : z.string().min(1, {message: "Title cannot be empty"}),
+    image : z.string().optional()
 })
 
 export const companyAddInput = z.object({
