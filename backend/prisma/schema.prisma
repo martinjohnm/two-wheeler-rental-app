@@ -54,27 +54,27 @@ model Bike {
 
 // ========= Slot schema =================================================================
 
-model Slot {
-  id         Int       @id @default(autoincrement())
-  startTime  DateTime
-  endTime    DateTime
-  isBooked   Boolean   @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
-  bookings   Booking[]
-}
+// model Slot {
+//   id         Int       @id @default(autoincrement())
+//   startTime  DateTime
+//   endTime    DateTime
+//   isBooked   Boolean   @default(false)
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @default(now())
+//   bookings   Booking[]
+// }
 
 model Booking {
   id        Int   @id @default(autoincrement())
   userId    Int
   bikeId    Int
-  slotId    Int
+  startTime DateTime
+  endTime   DateTime
   status    BookingStatus
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   bike      Bike     @relation(fields: [bikeId], references: [id])
-  slot      Slot     @relation(fields: [slotId], references: [id])
   order     Order?
 }
 

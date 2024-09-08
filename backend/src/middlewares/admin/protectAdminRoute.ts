@@ -3,7 +3,7 @@
 
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { JWT_COOKIE_TOKEN_ADMIN } from "../../utils/jwt-token-generater/generateToken";
+import { JWT_COOKIE_TOKEN_ADMIN } from "../../utils/cookie/jwt-token-generater/generateToken";
 import prisma from "../../db";
 import { AdminJwtPayloadInterface } from "../../types/admin/adminTypes";
 

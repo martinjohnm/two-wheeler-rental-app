@@ -2,8 +2,12 @@
 import { Request, Response } from "express";
 import prisma from "../../db";
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
 import { userLoginInput, userSignupinput } from "@martinjohnm/rebike-common";
-import { generateTokenAndSetCookie, JWT_COOKIE_TOKEN } from "../../utils/jwt-token-generater/generateToken";
+import { generateTokenAndSetCookie, JWT_COOKIE_TOKEN } from "../../utils/cookie/jwt-token-generater/generateToken";
+import { JwtPayloadInterface } from "../../types/user/userTypes";
+
+const jwt_secret = process.env.JWT_SECRET || ""
 
 export const signup = async (req : Request,res : Response) => {
 
@@ -161,3 +165,48 @@ export const logout = (req : Request,res : Response) => {
             })
     }
 }
+
+export const current_user = async (req : Request,res : Response) => {
+    try {
+
+        const bearertoken = req.cookies[JWT_COOKIE_TOKEN]
+        const token =  bearertoken.split(" ")[1];
+        
+        const decoded = jwt.verify(token, jwt_secret) as JwtPayloadInterface
+
+        if (!decoded) {
+            return res.status(401).json({
+                error : "Unauthorized - Invalid Token",
+                success : false
+            })
+        }
+      
+        const user = await prisma.user.findFirst(
+            {
+                where : {
+                    id : Number(decoded.userId)
+                }
+            }
+        )
+
+        return res.status(200).json({
+            success : true,
+            message : "User fetched successfully",
+            data : user
+        })
+
+    } catch(error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.log("Error during current user fetch",  message); 
+        res.status(500).json(
+            {
+                error : "Internal server error",
+                success : false
+            })
+    }
+}
+
+
+
