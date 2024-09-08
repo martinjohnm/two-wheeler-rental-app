@@ -7,10 +7,26 @@ import { SignUp } from './pages/SignUp'
 import { Toaster } from 'sonner'
 import { Bikes } from './pages/Bikes'
 import { AuthorizeUser, ProtectUser } from './protected/AuthUser'
-
+import { Home } from './pages/Home'
+import { useCurrentUser } from './hooks/useCurrentUser'
 function App() {
+  
+  const { loading, error } = useCurrentUser();
+
+  if (loading) {
+    return <div>
+      Loading....
+    </div>
+  }
+
+  if (error) {
+    return <div>
+      {error}
+    </div>
+  }
   return (
     <BrowserRouter>
+    
       <Toaster position='top-right' richColors/>
       <Routes>
             {/* User ROutes ====================== */}
@@ -28,6 +44,12 @@ function App() {
               <ProtectUser>
                 <Login/>
               </ProtectUser>} 
+            />
+            <Route path='/home' element={
+              <AuthorizeUser>
+                <Home/>
+              </AuthorizeUser>
+            } 
             />
             <Route path='/bikes' element={
               <AuthorizeUser>

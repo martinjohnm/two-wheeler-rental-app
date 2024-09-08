@@ -2,16 +2,14 @@ import { Hero } from "../components/Hero"
 import { Navbar } from "../components/Navbar"
 import { Steps } from "../components/Steps"
 
-export const Landing = () => {
-
+export const Home = () => {
    
     return <div className="bg-slate-100">
     
-        <Navbar isLoggedIn={false}/>
-        <Hero/>
-        <Steps/>
-        
+    <Navbar isLoggedIn={true}/>
+    <Hero/>
+    <Steps/>
     
-    </div>
 
+</div>
 }
