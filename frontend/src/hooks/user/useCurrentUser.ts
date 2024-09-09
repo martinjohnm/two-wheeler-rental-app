@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { CURRENT_USER } from "../utils/urls";
-import { User, userAtom } from "../store/atoms";
 import { useSetRecoilState } from "recoil";
+import { CURRENT_USER } from "../../utils/urls";
+import { userAtom } from "../../store/atoms";
+import { User } from "../../utils/types";
 
 
 
@@ -12,7 +13,7 @@ export const useCurrentUser = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const usersetState = useSetRecoilState(userAtom)
+    const setUserState = useSetRecoilState(userAtom)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,7 +28,7 @@ export const useCurrentUser = () => {
               if (responseData.success) {
 
                 setData(responseData.data);
-                usersetState(responseData.data)
+                setUserState(responseData.data)
                 setLoading(false);
                 
               }

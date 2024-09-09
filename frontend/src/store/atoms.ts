@@ -1,12 +1,8 @@
 import { atom } from "recoil";
+import { User } from "../utils/types";
 
 
 
-export interface User {
-    id : number,
-    email : string,
-    fullName : string
-}
 
 
 export const userAtom = atom<User | null>({

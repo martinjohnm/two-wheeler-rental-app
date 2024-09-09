@@ -8,7 +8,9 @@ import { Toaster } from 'sonner'
 import { Bikes } from './pages/Bikes'
 import { AuthorizeUser, ProtectUser } from './protected/AuthUser'
 import { Home } from './pages/Home'
-import { useCurrentUser } from './hooks/useCurrentUser'
+import { useCurrentUser } from './hooks/user/useCurrentUser'
+
+
 function App() {
   
   const { loading, error } = useCurrentUser();

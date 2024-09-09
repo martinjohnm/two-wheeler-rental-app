@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom"
+import { User } from "../utils/types"
+import { useUserLogout } from "../hooks/user/useLogout"
 
 
 
-export const Navbar = ({isLoggedIn} : {isLoggedIn : Boolean}) => {
+export const Navbar = ({user} : {user : User | null}) => {
+
+    const {logoutUser} = useUserLogout()
+    const logout = () => {
+      
+      logoutUser()
+      
+    }
+
     return (
          
 <nav className="sticky top-0 z-10 bg-emerald-700 backdrop-filter backdrop-blur-lg bg-opacity-45">
@@ -13,8 +23,8 @@ export const Navbar = ({isLoggedIn} : {isLoggedIn : Boolean}) => {
       <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/home"}>Home</Link>
       <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/bikes"}>Bikes</Link>
       <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/book"}>Book-Now</Link>
-      {isLoggedIn ? (
-        <button className="font-mono hover:font-semibold hover:text-blue-700 hover:underline">Logout</button>
+      {user ? (
+        <button onClick={logout} className="font-mono hover:font-semibold hover:text-blue-700 hover:underline">Logout</button>
       ) : (
         <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/login"}>Login</Link>
       )}

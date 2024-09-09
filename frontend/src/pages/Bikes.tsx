@@ -14,7 +14,7 @@ export const Bikes = ( ) => {
     return (
     <div className="bg-slate-100">
 
-        <Navbar isLoggedIn={true}/>
+        <Navbar user={user}/>
         <BikesTitle/>
         <BikesSection/>        
 

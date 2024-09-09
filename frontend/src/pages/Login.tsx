@@ -1,49 +1,22 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { TextInput } from "../components/TextInput"
 import { useState } from "react"
 import { UserLoginInput } from "@martinjohnm/rebike-common"
-import { LOGIN_USER } from "../utils/urls"
-import { USER_TOKEN } from "../utils/config"
-import { toast } from "sonner"
+import { useUserLogin } from "../hooks/user/useUserLogin"
 
 
 
 
 export const Login = () => {
 
-
-    const navigate = useNavigate()
+    const {loginUser} = useUserLogin()
     const [postInputs, setpostInputs] =  useState<UserLoginInput>({
         email : "",
         password : ""
     })
-    async function login() {
-        try {
-            const response = await fetch(LOGIN_USER.url,{
-                    method : LOGIN_USER.method,
-                    headers : {"Content-Type" : "application/json"},
-                    body : JSON.stringify(postInputs),
-                    credentials : "include",
-            })
-            
-            const data = await response.json()
-            
-            if (!data.success) {
-                toast.error(data.message)
-            }
 
-            toast.success(data.message)
-
-            localStorage.setItem(USER_TOKEN, data.data.token)
-            navigate("/home")
-            
-              
-        } catch(error) {
-            let message
-            if (error instanceof Error) message = error.message
-            else message = String(error)
-            console.log("Error during login",  message); 
-        }
+    const login = () => {
+        loginUser(postInputs)
     }
 
     return  <div className="flex items-center justify-center bg-[#020817] h-screen">
