@@ -20,7 +20,8 @@ export const bikeAddInput = z.object({
     model : z.number().min(1, {message : "Model Year cannot be empty"}),
     price : z.number().min(1, {message : "Price cannot be empty"}),
     title : z.string().min(1, {message: "Title cannot be empty"}),
-    image : z.string().optional()
+    image : z.string().optional(),
+
 })
 
 export const companyAddInput = z.object({
@@ -31,9 +32,15 @@ export const companyAddInput = z.object({
 export const bikeUpdateInput = z.object({
     model : z.number().min(1, {message : "Model Year cannot be empty"}),
     price : z.number().min(1, {message : "Price cannot be empty"}),
-    title : z.string().min(1, {message: "Title cannot be empty"})
+    title : z.string().min(1, {message: "Title cannot be empty"}),
+    image : z.string().optional(),
 })
 
+
+// Location
+export const locationAddInput = z.object({
+    title : z.string().min(1, {message : "Title cannot be empty"})
+})
 
 // type inference in zod
 
@@ -44,3 +51,6 @@ export type UserLoginInput  = z.infer<typeof userLoginInput>
 export type BikeAddInput = z.infer<typeof bikeAddInput>
 export type CompanyAddInput = z.infer<typeof companyAddInput>
 export type BikeUpdateInput = z.infer<typeof bikeUpdateInput>
+
+// Location 
+export type LocationAddInput = z.infer<typeof locationAddInput>

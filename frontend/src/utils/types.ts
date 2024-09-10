@@ -8,3 +8,41 @@ export interface User {
     email : string,
     fullName : string
 }
+
+export interface Bike {
+    companyId : number,
+    createdAt : Date,
+    id : number,
+    model : number,
+    price : number,
+    image : string,
+    title : string,
+    updatedAt : Date,
+    company : Comapny
+}
+
+export interface Comapny {
+    id : number,
+    title : string
+    country : string
+    createdAt : Date
+    updatedAt : Date
+}
+
+export interface Location {
+    id : number
+    title : string
+}
+
+export interface Company {
+    id : number
+    title : string
+    country : string
+}
+
+export interface BikesQuery {
+    startDate : Date ,
+    endDate : Date
+    companyId : number
+    locationId : number
+}

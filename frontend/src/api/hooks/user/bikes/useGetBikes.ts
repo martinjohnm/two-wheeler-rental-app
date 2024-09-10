@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { CURRENT_USER } from "../../utils/urls";
-import { userAtom } from "../../store/atoms";
-import { User } from "../../utils/types";
+import { bikesAtom } from "../../../../store/atoms";
+import { GET_ALL_BIKES } from "../../../../utils/urls";
 
 
+export const useGetBikes = () => {
 
-
-export const useCurrentUser = () => {
-
-    const [data, setData] = useState<User | null>(null);
+    
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const setUserState = useSetRecoilState(userAtom)
+    const setBikesState = useSetRecoilState(bikesAtom)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-              const response = await fetch(CURRENT_USER.url,{
-                method : CURRENT_USER.method,
+              const response = await fetch(GET_ALL_BIKES.url,{
+                method : GET_ALL_BIKES.method,
                 headers : {"Content-Type" : "application/json"},
                 credentials : "include",
                 })
@@ -27,12 +24,11 @@ export const useCurrentUser = () => {
               const responseData = await response.json()
               if (responseData.success) {
 
-                setData(responseData.data);
-                setUserState(responseData.data)
+                setBikesState(responseData.data)
                 setLoading(false);
+            
                 
               }
-              setData(null)
               setLoading(false)
             } catch (error) {
               setError('An error occurred while fetching data');
@@ -43,6 +39,6 @@ export const useCurrentUser = () => {
           fetchData();
     }, [])   
 
-    return { data, loading, error}
+    return { loading, error}
     
 }

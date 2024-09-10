@@ -16,4 +16,9 @@ export const SIGNUP_USER    =  {url : baseUserUrl + "/auth/signup", method : "PO
 export const LOGIN_USER     =  {url : baseUserUrl + "/auth/login", method : "POST"}
 export const LOGOUT_USER    =  {url : baseUserUrl + "/auth/logout", method : "POST"}
 export const CURRENT_USER   =  {url : baseUserUrl + "/auth/current-user", method : "GET"}
-export const ALL_DOCTORS  =  {url : baseUserUrl + "/all-doctors", method : "GET"}
+// === bikes===
+export const GET_ALL_BIKES  =  {url : baseUserUrl + "/bikes/get-bikes", method : "GET"}
+export const GET_ALL_BIKES_BY_FILTER  =  {url : baseUserUrl + "/bikes/get-bikes-by-filter", method : "POST"}
+// === location ==
+export const GET_ALL_LOCATION = {url : baseUserUrl + "/location/get-locations", method : "GET"}
+export const GET_ALL_COMPANIES = {url : baseUserUrl + "/bikes/get-companies", method : "GET"}

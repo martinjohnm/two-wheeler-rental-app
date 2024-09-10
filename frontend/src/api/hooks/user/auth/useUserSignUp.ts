@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { SIGNUP_USER } from "../../utils/urls";
-import { userAtom } from "../../store/atoms";
-import { USER_TOKEN } from "../../utils/config";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { UserSignupinput } from "@martinjohnm/rebike-common";
+import { userAtom } from "../../../../store/atoms";
+import { SIGNUP_USER } from "../../../../utils/urls";
+import { USER_TOKEN } from "../../../../utils/config";
 
 
 

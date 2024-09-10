@@ -2,7 +2,6 @@ import { Request, Response } from "express"
 import prisma from "../../db"
 import { bikeAddInput, bikeUpdateInput, companyAddInput } from "@martinjohnm/rebike-common"
 import { uploadImage } from "../../utils/cloudinary/cloudinary_uploader"
-
 // Bike CRUD Operation Indivudual
 
 export const add_bike = async (req : Request,res : Response) => {
@@ -10,6 +9,8 @@ export const add_bike = async (req : Request,res : Response) => {
     try {
 
         const companyId = req.query.companyId
+        const locationId = req.query.locationId
+
         const body = req.body
         const response = bikeAddInput.safeParse(body);
         if (!response.success) {
@@ -24,7 +25,7 @@ export const add_bike = async (req : Request,res : Response) => {
 
         if (body.image) {
             const imagee = "/home/martin-john-m/Videos/aaaadevssprojeccts/two-wheeler-app-node/backend/src/media/r15.png"
-            const test = await uploadImage(imagee)
+            const test = await uploadImage(body.image)
             body.image = test
         }
 
@@ -34,6 +35,9 @@ export const add_bike = async (req : Request,res : Response) => {
                 ...body,
                 company : {
                     connect : {id : Number(companyId)}
+                },
+                location : {
+                    connect : {id : Number(locationId)}
                 }
             }
         })
@@ -68,7 +72,8 @@ export const get_bike = async (req : Request,res : Response) => {
         const bike = await prisma.bike.findFirst({
             where : {
                 id
-            }
+            },
+            include : { company : true}
         })
 
         if (!bike) {
@@ -104,6 +109,7 @@ export const update_bike = async (req : Request,res : Response) => {
         
         const bikeId = Number(req.params.id)
         const companyId = Number(req.query.companyId)
+        const locationId = Number(req.query.locationId)
         const body = req.body
         const response = bikeUpdateInput.safeParse(body);
         if (!response.success) {
@@ -114,7 +120,8 @@ export const update_bike = async (req : Request,res : Response) => {
             })
             return
         }
-        const {model, price, title} =  body;
+
+
         const bike = await prisma.bike.update({
             where : {
                 id : bikeId

@@ -42,6 +42,7 @@ model Company {
 model Bike {
   id         Int      @id @default(autoincrement())
   companyId  Int 
+  locationId Int @default(1)
   model      Int
   price      Int   
   title      String
@@ -49,45 +50,40 @@ model Bike {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
   company    Company  @relation(fields: [companyId], references: [id], onDelete: Cascade) 
+  location   Location @relation(fields: [locationId], references: [id], onDelete: Cascade) 
   bookings   Booking[]
 }
 
-// ========= Slot schema =================================================================
-
-// model Slot {
-//   id         Int       @id @default(autoincrement())
-//   startTime  DateTime
-//   endTime    DateTime
-//   isBooked   Boolean   @default(false)
-//   createdAt  DateTime @default(now())
-//   updatedAt  DateTime @default(now())
-//   bookings   Booking[]
-// }
+model Location {
+  id         Int   @id @default(autoincrement())
+  title      String
+  bikes      Bike[]
+}
 
 model Booking {
-  id        Int   @id @default(autoincrement())
-  userId    Int
-  bikeId    Int
-  startTime DateTime
-  endTime   DateTime
-  status    BookingStatus
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  bike      Bike     @relation(fields: [bikeId], references: [id])
-  order     Order?
+  id         Int   @id @default(autoincrement())
+  userId     Int
+  bikeId     Int
+  startTime  DateTime
+  endTime    DateTime
+  status     BookingStatus
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  bike       Bike     @relation(fields: [bikeId], references: [id])
+  order      Order?
 }
 
 model Order {
-  id        Int   @id @default(autoincrement())
-  bookingId Int   @unique
-  userId    Int
-  amount    Float
-  status    OrderStatus
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  booking   Booking  @relation(fields: [bookingId], references: [id])
+  id         Int   @id @default(autoincrement())
+  bookingId  Int   @unique
+  userId     Int
+  amount     Float
+  status     OrderStatus
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  booking    Booking  @relation(fields: [bookingId], references: [id])
 }
 
 

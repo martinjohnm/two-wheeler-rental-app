@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { LOGOUT_USER } from "../../utils/urls";
-import { userAtom } from "../../store/atoms";
-import { USER_TOKEN } from "../../utils/config";
 import { useNavigate } from "react-router-dom";
-
+import { userAtom } from "../../../../store/atoms";
+import { LOGOUT_USER } from "../../../../utils/urls";
+import { USER_TOKEN } from "../../../../utils/config";
 
 
 

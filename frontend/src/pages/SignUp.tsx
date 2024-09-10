@@ -2,8 +2,7 @@ import { Link } from "react-router-dom"
 import { TextInput } from "../components/TextInput"
 import { useState } from "react"
 import { UserSignupinput } from "@martinjohnm/rebike-common"
-import { useUserSignup } from "../hooks/user/useUserSignUp"
-
+import { useUserSignup } from "../api/hooks/user/auth/useUserSignUp"
 
 
 

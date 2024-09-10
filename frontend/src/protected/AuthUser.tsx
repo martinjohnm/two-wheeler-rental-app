@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { ReactNode } from "react";
 import { USER_TOKEN } from "../utils/config";
-import { jwtDecode } from "jwt-decode";
+
 
 export  function AuthorizeUser({children} : {children : ReactNode}){
     const token=localStorage.getItem(USER_TOKEN);
