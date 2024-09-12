@@ -167,26 +167,51 @@ export const get_bikes_by_date_range = async (req : Request,res : Response) => {
         
         const startTimeFromUser = new Date(body.startTime)
         const endTimeFromUser = new Date(body.endTime)
-
+        //(startTimeFromUser >= booking.startTime && startTimeFromUser <= booking.endTime) || (endTimeFromUser >= booking.startTime && endTimeFromUser <= booking.endTime)
       
         const bikes = await prisma.bike.findMany(
             {
-                include : {bookings : true}
+                where : {
+                    bookings : {
+                        none : {
+                            OR : [
+                                { 
+                                    AND : [
+                                        {
+                                        endTime : {
+                                            gte : startTimeFromUser
+                                        },
+                                        startTime : {
+                                            lte : startTimeFromUser
+                                        }
+                                    }
+                                    ]
+                                },
+                                {
+                                    AND : [
+                                        {
+                                        startTime : {
+                                            lte : endTimeFromUser
+                                        },
+                                        endTime : {
+                                            gte : endTimeFromUser
+                                        }
+                                    }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
             }
         )
 
-        const filteredBikes = bikes.filter((bike) => {
-            bike.bookings.filter((booking) => {
-                if (booking.startTime < startTimeFromUser && booking.endTime < startTimeFromUser) {
-
-                }
-            })
-        })
+        console.log(bikes.length);
 
         return res.status(200).json({
             data : bikes,
             success : true,
-            message : "Companies fetched successfully!"
+            message : "Bikes by slots fetched successfully!"
         })
       
     } catch(error) {
