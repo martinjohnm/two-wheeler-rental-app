@@ -12,10 +12,16 @@ export const create_booking = async (req : Request,res : Response) => {
 
     try {
 
-        const body = req.body
+        let body = req.body
+        const startTimeFromUser = new Date(body.startTime)
+        const endTimeFromUser = new Date(body.endTime)
+
+        body.startTime = new Date(body.startTime)
+        body.endTime = new Date(body.endTime)
 
         const response = bookingCreateInput.safeParse(body);
         if (!response.success) {
+            
             res.status(400).json({
                 error : response.error,
                 success : false,
@@ -24,21 +30,72 @@ export const create_booking = async (req : Request,res : Response) => {
             return
         }
 
-        const bike = await prisma.booking.create({
-            ...body
+        const checkBooking = await prisma.booking.findFirst({
+
+            where : {
+                OR : [
+                    { 
+                        AND : [
+                            {
+                            endTime : {
+                                gte : startTimeFromUser
+                            },
+                            startTime : {
+                                lte : startTimeFromUser
+                            },
+                            NOT : {
+                                status : "CANCELLED"
+                            }
+                            
+                        }
+                        ]
+                    },
+                    {
+                        AND : [
+                            {
+                            startTime : {
+                                lte : endTimeFromUser
+                            },
+                            endTime : {
+                                gte : endTimeFromUser
+                            },
+                            NOT : {
+                                status : "CANCELLED"
+                            }
+                        }
+                        ]
+                    }
+                ]
+            }
         })
 
-        if (!bike) {
+        if (checkBooking) {
             return res.status(400).json({
                 success : false,
-                error : "No such bike"
+                error : "Booking error"
+            })
+        }
+
+
+        const bookingCreated = await prisma.booking.create({
+            
+            data : {
+                ...body
+            }
+            
+        })
+
+        if (!bookingCreated) {
+            return res.status(400).json({
+                success : false,
+                error : "Booking error"
             })
         }
 
         res.status(200).json({
-            data : bike,
+            data : bookingCreated,
             success : true,
-            message : "Bike fetched successfully!"
+            message : "Bike Booked successfully!"
         })
       
     } catch(error) {

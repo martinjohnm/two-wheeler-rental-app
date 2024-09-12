@@ -1,6 +1,7 @@
 
 import { Request, Response } from "express"
 import prisma from "../../db"
+import { bookingDateBikeFilter } from "@martinjohnm/rebike-common"
 
 
 
@@ -123,6 +124,8 @@ export const get_bikes_by_filter = async (req : Request,res : Response) => {
         
         const body = req.body
 
+        
+
         const companies = await prisma.bike.findMany(
             {
                 where : {
@@ -163,15 +166,32 @@ export const get_bikes_by_filter = async (req : Request,res : Response) => {
 export const get_bikes_by_date_range = async (req : Request,res : Response) => {
     try {
         
-        const body = req.body
+        let  body = req.body
+
+        body.startTime = new Date(body.startTime)
+        body.endTime = new Date(body.endTime)
+        
+        const response = bookingDateBikeFilter.safeParse(body);
+        if (!response.success) {
+            console.log(response.error);
+            
+            res.status(400).json({
+                error : response.error,
+                success : false,
+                message : "Signup failed"
+            })
+            return
+        }
         
         const startTimeFromUser = new Date(body.startTime)
         const endTimeFromUser = new Date(body.endTime)
         //(startTimeFromUser >= booking.startTime && startTimeFromUser <= booking.endTime) || (endTimeFromUser >= booking.startTime && endTimeFromUser <= booking.endTime)
+        console.log(startTimeFromUser, endTimeFromUser);
       
         const bikes = await prisma.bike.findMany(
             {
                 where : {
+                    
                     bookings : {
                         none : {
                             OR : [
@@ -183,7 +203,11 @@ export const get_bikes_by_date_range = async (req : Request,res : Response) => {
                                         },
                                         startTime : {
                                             lte : startTimeFromUser
+                                        },
+                                        NOT : {
+                                            status : "CANCELLED"
                                         }
+                                        
                                     }
                                     ]
                                 },
@@ -195,13 +219,19 @@ export const get_bikes_by_date_range = async (req : Request,res : Response) => {
                                         },
                                         endTime : {
                                             gte : endTimeFromUser
+                                        },
+                                        NOT : {
+                                            status : "CANCELLED"
                                         }
                                     }
                                     ]
                                 }
                             ]
-                        }
-                    }
+                        },
+                        
+                    },
+                
+                    
                 }
             }
         )
