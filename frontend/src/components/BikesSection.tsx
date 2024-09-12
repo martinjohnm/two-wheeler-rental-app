@@ -13,7 +13,7 @@ export const BikesSection = () => {
     const bikes = useRecoilValue(bikesAtom)
 
     useEffect(() => {
-        console.log(bikes);
+        
         
     },[bikes])
     if (loading) {
@@ -24,7 +24,7 @@ export const BikesSection = () => {
     return <div className="max-w-7xl bg-red-400 mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
 
         {bikes?.map((data) => (
-            <BikesCard key={data.id} title={data.title} model={data.model} price={data.price} image={data.image} company={data.company.title}/>
+            <BikesCard key={data.id} id={data.id} title={data.title} model={data.model} price={data.price} image={data.image} company={data.company.title}/>
         ))}
 
     </div>

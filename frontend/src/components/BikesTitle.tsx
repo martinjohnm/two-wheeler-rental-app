@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react"
 import { CompanySelector } from "./CompanySelector"
-import EndDatePicker from "./EndDatePicker"
 import { LocationSelector } from "./LocationSelector"
-import StartDatePicker from "./StartDatePicker"
 import { useGetBikesByFilter } from "../api/hooks/user/bikes/useGetBikesByFIlterr"
+import { BikeQueryType } from "../utils/types"
 
 
-export interface BikeQueryType {
-    startDate? : Date
-    endDate? : Date
-    companyId? : number
-    locationId? : number
-}
+
 
 
 export const BikesTitle = () => {
@@ -26,9 +20,11 @@ export const BikesTitle = () => {
         }
     }, [postInputs])
 
+    // console.log(postInputs);
+    
 
     return <div className="bg-green-300 max-w-7xl mx-auto items-center justify-center grid grid-cols-1 lg:grid-cols-4 gap-4 p-6">
-            <div >
+            {/* <div >
                 <StartDatePicker onChange={(date : Date) => {
                     setpostInputs(c => ({
                         ...c, 
@@ -43,7 +39,7 @@ export const BikesTitle = () => {
                         endDate : date
                     })) 
                 }} placeholder="Select end date"/>
-            </div>
+            </div> */}
             <div >
                 <CompanySelector onChange={(companyId : number) => {
                     setpostInputs(c => ({

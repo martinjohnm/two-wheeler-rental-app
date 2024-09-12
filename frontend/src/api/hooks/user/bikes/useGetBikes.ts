@@ -22,6 +22,7 @@ export const useGetBikes = () => {
                 })
               
               const responseData = await response.json()
+              
               if (responseData.success) {
 
                 setBikesState(responseData.data)

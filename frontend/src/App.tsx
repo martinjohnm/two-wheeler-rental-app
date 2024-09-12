@@ -9,6 +9,7 @@ import { Bikes } from './pages/Bikes'
 import { AuthorizeUser, ProtectUser } from './protected/AuthUser'
 import { Home } from './pages/Home'
 import { useCurrentUser } from './api/hooks/user/auth/useCurrentUser'
+import { Bike } from './pages/Bike'
 
 
 function App() {
@@ -56,6 +57,12 @@ function App() {
             <Route path='/bikes' element={
               <AuthorizeUser>
                 <Bikes/>
+              </AuthorizeUser>
+            } 
+            />
+            <Route path='/bike/:id' element={
+              <AuthorizeUser>
+                <Bike/>
               </AuthorizeUser>
             } 
             />

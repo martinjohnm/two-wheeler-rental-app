@@ -1,7 +1,5 @@
 import { atom } from "recoil";
-import { Bike, BikesQuery, Company, Location, User } from "../utils/types";
-
-
+import { Bike, BikeQueryType, BikesQuery, Company, Location, User } from "../utils/types";
 
 
 
@@ -33,4 +31,22 @@ export const BikesQueryAtom = atom<BikesQuery>({
         companyId : 2,
         locationId : 2
     }
+})
+
+
+export const datePickerAtom = atom<BikeQueryType>({
+    key : "datePickerAtom",
+    default : {
+        startDate : undefined,
+        endDate : undefined
+    }
+})
+
+export const startDateAtom = atom<Date | null>({
+    key : "startDateAtom",
+    default : null
+})
+export const endDateAtom = atom<Date | null>({
+    key : "endDateAtom",
+    default : null
 })

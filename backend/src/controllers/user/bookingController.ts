@@ -1,22 +1,31 @@
 import { Request, Response } from "express"
 import prisma from "../../db"
+import { bookingCreateInput } from "@martinjohnm/rebike-common";
 
 
 
 
-// Bikes controller
+// Bookings controller
 
 
-export const get_bike = async (req : Request,res : Response) => {
+export const create_booking = async (req : Request,res : Response) => {
 
     try {
-        
-        const id = Number(req.params.id)
 
-        const bike = await prisma.bike.findFirst({
-            where : {
-                id
-            }
+        const body = req.body
+
+        const response = bookingCreateInput.safeParse(body);
+        if (!response.success) {
+            res.status(400).json({
+                error : response.error,
+                success : false,
+                message : "Booking failed"
+            })
+            return
+        }
+
+        const bike = await prisma.booking.create({
+            ...body
         })
 
         if (!bike) {
@@ -47,25 +56,29 @@ export const get_bike = async (req : Request,res : Response) => {
 }
 
 
-
-export const get_bikes = async (req : Request,res : Response) => {
+export const get_booking = async (req : Request,res : Response) => {
 
     try {
-        
- 
-        const bikes = await prisma.bike.findMany()
 
-        if (!bikes) {
+
+        const bike = await prisma.booking.findMany({
+            include : {
+                user : true,
+                bike : true
+            }
+        })
+
+        if (!bike) {
             return res.status(400).json({
                 success : false,
-                error : "No Bikes available"
+                error : "No Bookings yet"
             })
         }
 
-        res.status(200).json({
-            data : bikes,
+        return res.status(200).json({
+            data : bike,
             success : true,
-            message : "Bikes fetched successfully!"
+            message : "Bookings fetched successfully!"
         })
       
     } catch(error) {
@@ -81,3 +94,4 @@ export const get_bikes = async (req : Request,res : Response) => {
         
     }
 }
+

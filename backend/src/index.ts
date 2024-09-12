@@ -33,11 +33,11 @@ app.use(cookieParser())
 app.use("/api/user/auth", authRoutes)
 app.use("/api/user/bikes", bikesUserRoutes)
 app.use("/api/user/location", locationRoutes)
+app.use("/api/user/booking/", bookingRoutes)
 
 // admin routes
 app.use("/api/admin/auth", adminAuthRoutes)
 app.use("/api/admin/bikes", bikesadminRoutes)
-app.use("/api/admin/booking/", bookingRoutes)
 app.use("/api/admin/location/", locationAdminROutes)
 
 app.listen(PORT, () => {

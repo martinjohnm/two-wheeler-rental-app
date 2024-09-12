@@ -1,38 +1,30 @@
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
-import { bikesAtom } from "../../../../store/atoms";
-import { GET_ALL_BIKES_BY_FILTER } from "../../../../utils/urls";
+import { GET_ALL_BIKES_BY_DATE_RANGE, GET_ALL_BIKES_BY_FILTER } from "../../../../utils/urls";
 import { BikeQueryType } from "../../../../utils/types";
 
 
-export const useGetBikesByFilter = () => {
+export const useGetBikesByDateRange = () => {
 
     
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const setBikesState = useSetRecoilState(bikesAtom)
-    
-    const fetchBikesByFilter = async (postInputs : BikeQueryType) => {
+    const fetchBikesByDateRange = async (postInputs : BikeQueryType) => {
         try {
 
           
-            const response = await fetch(GET_ALL_BIKES_BY_FILTER.url,{
-                method : GET_ALL_BIKES_BY_FILTER.method,
+            const response = await fetch(GET_ALL_BIKES_BY_DATE_RANGE.url,{
+                method : GET_ALL_BIKES_BY_DATE_RANGE.method,
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify(postInputs),
                 credentials : "include",
                 })
               
               const responseData = await response.json()
-              console.log(responseData.data);
-              
               if (responseData.success) {
            
-                setBikesState(responseData.data)
                 setLoading(false);
-                setBikesState(responseData.data)
-                
+                     
               }
               setLoading(false)
         } catch (error) {
@@ -44,6 +36,6 @@ export const useGetBikesByFilter = () => {
     };
  
 
-    return { loading, error, fetchBikesByFilter}
+    return { loading, error, fetchBikesByDateRange}
     
 }

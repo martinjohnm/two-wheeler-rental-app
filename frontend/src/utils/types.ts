@@ -46,3 +46,15 @@ export interface BikesQuery {
     companyId : number
     locationId : number
 }
+
+export interface BikeQueryType {
+    startTime? : Date
+    endTime? : Date
+    companyId? : number
+    locationId? : number
+}
+
+export interface DateQueryType {
+    startDate : Date | null
+    endDate : Date | null
+}

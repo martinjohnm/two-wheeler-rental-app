@@ -7,7 +7,7 @@ import { userAtom } from "../store/atoms"
 export const Home = () => {
    
     const user = useRecoilValue(userAtom)
-    return <div className="bg-slate-100">
+    return <div className="">
     
     <Navbar user={user}/>
     <Hero/>

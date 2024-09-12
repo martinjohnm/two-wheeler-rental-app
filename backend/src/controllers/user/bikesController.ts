@@ -16,6 +16,7 @@ export const get_bikes = async (req : Request,res : Response) => {
             
         })
 
+     
         if (!bikes) {
             return res.status(400).json({
                 success : false,
@@ -121,14 +122,12 @@ export const get_bikes_by_filter = async (req : Request,res : Response) => {
     try {
         
         const body = req.body
-        console.log(body);
-        
-        
+
         const companies = await prisma.bike.findMany(
             {
                 where : {
                     
-                    companyId : body.companyId,
+                    ...body
                     
                 }, 
                 include : { company : true, location : true},
@@ -143,6 +142,49 @@ export const get_bikes_by_filter = async (req : Request,res : Response) => {
         }
         return res.status(200).json({
             data : companies,
+            success : true,
+            message : "Companies fetched successfully!"
+        })
+      
+    } catch(error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.log("Error during companies fetching",  message); 
+        res.status(500).json(
+            {
+                success : false,
+                error : "Internal server error"
+            })
+        
+    }
+}
+
+export const get_bikes_by_date_range = async (req : Request,res : Response) => {
+    try {
+        
+        const body = req.body
+        
+        const startTimeFromUser = new Date(body.startTime)
+        const endTimeFromUser = new Date(body.endTime)
+
+      
+        const bikes = await prisma.bike.findMany(
+            {
+                include : {bookings : true}
+            }
+        )
+
+        const filteredBikes = bikes.filter((bike) => {
+            bike.bookings.filter((booking) => {
+                if (booking.startTime < startTimeFromUser && booking.endTime < startTimeFromUser) {
+
+                }
+            })
+        })
+
+        return res.status(200).json({
+            data : bikes,
             success : true,
             message : "Companies fetched successfully!"
         })

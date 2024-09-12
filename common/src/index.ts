@@ -42,7 +42,24 @@ export const locationAddInput = z.object({
     title : z.string().min(1, {message : "Title cannot be empty"})
 })
 
+// Booking 
+export const bookingCreateInput = z.object({
+    userId : z.number().min(1, {message : "userId is needed"}),
+    bikeId : z.number().min(1, {message : "bikeId is needed"}),
+    startTime : z.date({message : "date is needed"}),
+    endTime : z.date({message : "date is needed"}),
+    status : z.string().min(1, {message : "Status is needed"})
+})
+
+
+
+
+
 // type inference in zod
+
+
+
+
 
 // User
 export type UserSignupinput = z.infer<typeof userSignupinput>
@@ -54,3 +71,6 @@ export type BikeUpdateInput = z.infer<typeof bikeUpdateInput>
 
 // Location 
 export type LocationAddInput = z.infer<typeof locationAddInput>
+
+// Booking
+export type BookingCreateInput = z.infer<typeof bookingCreateInput>
