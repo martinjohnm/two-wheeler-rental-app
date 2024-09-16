@@ -1,17 +1,17 @@
 import { useRecoilValue } from "recoil"
-import { Hero } from "../components/Hero"
+import { DateFilterForm } from "../components/DateFilterForm"
 import { Navbar } from "../components/Navbar"
-import { Steps } from "../components/Steps"
 import { userAtom } from "../store/atoms"
-
 export const Home = () => {
    
     const user = useRecoilValue(userAtom)
-    return <div className="">
+
+    
+    return <div className="bg-[url('bgimage.png')] bg-no-repeat bg-cover h-screen">
     
     <Navbar user={user}/>
-    <Hero/>
-    <Steps/>
+    <DateFilterForm />
+    {/* <Steps/> */}
     
 
 </div>

@@ -21,6 +21,20 @@ export interface Bike {
     company : Comapny
 }
 
+export interface FilteredBikes {
+    companyId : number,
+    locationId : number,
+    createdAt : Date,
+    id : number,
+    model : number,
+    price : number,
+    image : string,
+    title : string,
+    updatedAt : Date,
+    company : Comapny,
+    location : Location
+}
+
 export interface Comapny {
     id : number,
     title : string

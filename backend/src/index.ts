@@ -38,7 +38,7 @@ app.use("/api/user/booking/", bookingRoutes)
 // admin routes
 app.use("/api/admin/auth", adminAuthRoutes)
 app.use("/api/admin/bikes", bikesadminRoutes)
-app.use("/api/admin/location/", locationAdminROutes)
+app.use("/api/admin/location/:id", locationAdminROutes)
 
 app.listen(PORT, () => {
 

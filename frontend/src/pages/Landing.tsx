@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil"
-import { Hero } from "../components/Hero"
+import { DateFilterForm } from "../components/DateFilterForm"
 import { Navbar } from "../components/Navbar"
 import { Steps } from "../components/Steps"
 import { userAtom } from "../store/atoms"
@@ -11,7 +11,7 @@ export const Landing = () => {
     return <div className="bg-slate-100">
     
         <Navbar user={user}/>
-        <Hero/>
+        <DateFilterForm/>
         <Steps/>
         
     

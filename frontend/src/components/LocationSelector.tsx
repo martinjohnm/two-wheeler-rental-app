@@ -33,8 +33,8 @@ export const LocationSelector = ({onChange} : {onChange : any}) => {
   }, [selectedOption])
   
   
-  return <div className='min-w-48 pt-4'>
-    <Select options={options} onChange={handleChange} placeholder={"Location"}/>
+  return <div className="w-full items-center justify-center">
+    <Select className='' options={options} onChange={handleChange} placeholder={"Location"}/>
   </div>
   
 }

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { Bike, BikeQueryType, BikesQuery, Company, Location, User } from "../utils/types";
+import { Bike, BikeQueryType, BikesQuery, Company, FilteredBikes, Location, User } from "../utils/types";
 
 
 
@@ -8,10 +8,21 @@ export const userAtom = atom<User | null>({
     default : null
 })
 
+export const bikeForBooking = atom<Bike | null>({
+    key : "bikeForBooking",
+    default : null
+})
+
 export const bikesAtom = atom<Bike[] | null>({
     key : "bikes",
     default : null
 })
+
+export const FilteredBikesAtom = atom<FilteredBikes[] | null>({
+    key : "FilteredBikes",
+    default : null
+})
+
 
 export const locationAtom = atom<Location[] | null>({
     key : "location",
@@ -37,8 +48,10 @@ export const BikesQueryAtom = atom<BikesQuery>({
 export const datePickerAtom = atom<BikeQueryType>({
     key : "datePickerAtom",
     default : {
-        startDate : undefined,
-        endDate : undefined
+        startTime : undefined,
+        endTime : undefined,
+        locationId : undefined,
+        companyId : undefined
     }
 })
 
@@ -50,3 +63,5 @@ export const endDateAtom = atom<Date | null>({
     key : "endDateAtom",
     default : null
 })
+
+

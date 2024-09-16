@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; 
-import { TimeRange } from '../utils/TimeRange';
+import { TimeRange } from '../utils/time/TimeRange';
 import Select from 'react-select'
 
-const StartDatePicker = ({placeholder, onChange, minDate, changeEndVisible} : {placeholder : string, onChange : any, minDate : Date, changeEndVisible : any}) => {
+interface StartDatePickerType  {
+   placeholder : string,
+   onChange : any, 
+   minDate : Date, 
+   changeEndVisible : any
+}
+const StartDatePicker = ({placeholder, onChange, minDate, changeEndVisible} : StartDatePickerType) => {
 
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [disabled, setDisabled] = useState<Boolean>(true)
@@ -44,18 +50,18 @@ const StartDatePicker = ({placeholder, onChange, minDate, changeEndVisible} : {p
 
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-between items-center'>
       <DatePicker
         selected={selectedDate}
         onChange={(date) => handleDateChange(date)}
         dateFormat="dd/MM/yyyy"
-        className="py-2 mt-4 rounded-md font-bold bg-black border text-center font-mono text-white shadow-sm outline-none items-center justify-center"
+        className="py-2 mt-4 rounded-md border text-center font-mono text-black shadow-sm outline-none items-center justify-center"
         placeholderText={placeholder}
         minDate={minDate}
       />
 
       <div className='min-w-48 pt-4 mx-2'>
-        <Select isDisabled={Boolean(disabled)} options={dates} placeholder="select time" onChange={handleTimeChange}/>
+        <Select className='text-center font-mono' isDisabled={Boolean(disabled)} options={dates} placeholder="select start time" onChange={handleTimeChange}/>
       </div>
       
     </div>

@@ -6,7 +6,7 @@ import { FaBicycle } from "react-icons/fa";
 
 export const Steps = () => {
     return (
-        <div className="max-w-7xl mx-auto container p-6">
+        <div className="max-w-7xl mx-auto container">
             
             <div className="justify-center items-center">
                 <div className="text-orange-600 flex justify-center items-center">

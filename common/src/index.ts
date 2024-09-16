@@ -51,6 +51,13 @@ export const bookingCreateInput = z.object({
     status : z.string().min(1, {message : "Status is needed"})
 })
 
+export const bookingDateBikeFilter = z.object({
+    startTime : z.date({message : "date is needed"}),
+    endTime : z.date({message : "date is needed"}),
+    locationId : z.number().min(1, {message : "Location Id Needed"}).optional(),
+    companyId : z.number().min(1, {message : "Company Id Needed"}).optional(),
+})
+
 
 
 
@@ -74,3 +81,5 @@ export type LocationAddInput = z.infer<typeof locationAddInput>
 
 // Booking
 export type BookingCreateInput = z.infer<typeof bookingCreateInput>
+export type BookingDateBikeFilter = z.infer<typeof bookingDateBikeFilter>
+

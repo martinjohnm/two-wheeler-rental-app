@@ -21,7 +21,7 @@ export const BikesSection = () => {
             Loading....
         </div>
     }
-    return <div className="max-w-7xl bg-red-400 mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+    return <div className="grid md:grid-cols-2 lg:grid-cols-3 mx-auto container gap-10 p-6">
 
         {bikes?.map((data) => (
             <BikesCard key={data.id} id={data.id} title={data.title} model={data.model} price={data.price} image={data.image} company={data.company.title}/>

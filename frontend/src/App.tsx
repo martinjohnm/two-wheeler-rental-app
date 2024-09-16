@@ -5,17 +5,20 @@ import { Landing } from './pages/Landing'
 import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
 import { Toaster } from 'sonner'
-import { Bikes } from './pages/Bikes'
 import { AuthorizeUser, ProtectUser } from './protected/AuthUser'
 import { Home } from './pages/Home'
 import { useCurrentUser } from './api/hooks/user/auth/useCurrentUser'
-import { Bike } from './pages/Bike'
+import { AvailableBikes } from './pages/AvailableBikes'
+import { useGetCompanies } from './api/hooks/user/bikes/useGetCompanies'
+import { useGetLocations } from './api/hooks/user/location/useGetLocation'
+import { BookingPage } from './pages/BookingPage'
 
 
 function App() {
   
   const { loading, error } = useCurrentUser();
-
+  useGetCompanies()
+  useGetLocations()
   if (loading) {
     return <div>
       Loading....
@@ -54,7 +57,20 @@ function App() {
               </AuthorizeUser>
             } 
             />
-            <Route path='/bikes' element={
+            <Route path='/available-bikes' element={
+              <AuthorizeUser>
+                <AvailableBikes/>
+              </AuthorizeUser>
+            } 
+            />
+
+            <Route path={`/book/:id`} element={
+              <AuthorizeUser>
+                <BookingPage/>
+              </AuthorizeUser>
+            } 
+            />
+            {/* <Route path='/bikes' element={
               <AuthorizeUser>
                 <Bikes/>
               </AuthorizeUser>
@@ -65,7 +81,7 @@ function App() {
                 <Bike/>
               </AuthorizeUser>
             } 
-            />
+            /> */}
       
       </Routes>
     </BrowserRouter>

@@ -33,6 +33,7 @@ export const create_booking = async (req : Request,res : Response) => {
         const checkBooking = await prisma.booking.findFirst({
 
             where : {
+                bikeId: body.bikeId,
                 OR : [
                     { 
                         AND : [
@@ -72,7 +73,7 @@ export const create_booking = async (req : Request,res : Response) => {
         if (checkBooking) {
             return res.status(400).json({
                 success : false,
-                error : "Booking error"
+                message : "Slot already booked by someone"
             })
         }
 
@@ -88,7 +89,7 @@ export const create_booking = async (req : Request,res : Response) => {
         if (!bookingCreated) {
             return res.status(400).json({
                 success : false,
-                error : "Booking error"
+                meassage : "Booking error"
             })
         }
 
@@ -102,7 +103,7 @@ export const create_booking = async (req : Request,res : Response) => {
         let message
         if (error instanceof Error) message = error.message
         else message = String(error)
-        console.log("Error during signup",  message); 
+        console.log("Error during booking",  message); 
         res.status(500).json(
             {
                 success : false,
@@ -113,7 +114,7 @@ export const create_booking = async (req : Request,res : Response) => {
 }
 
 
-export const get_booking = async (req : Request,res : Response) => {
+export const get_booking_bulk = async (req : Request,res : Response) => {
 
     try {
 
@@ -143,6 +144,114 @@ export const get_booking = async (req : Request,res : Response) => {
         if (error instanceof Error) message = error.message
         else message = String(error)
         console.log("Error during signup",  message); 
+        res.status(500).json(
+            {
+                success : false,
+                error : "Internal server error"
+            })
+        
+    }
+}
+
+
+export const get_booking_by_id = async (req : Request,res : Response) => {
+
+    try {
+
+        const id = Number(req.params.id)
+
+   
+        const bike = await prisma.booking.findFirst({
+            where : {
+                id 
+            },
+            include : {
+                user : true,
+                bike : true
+            }
+        })
+
+        if (!bike) {
+            return res.status(400).json({
+                success : false,
+                error : "No such Booking"
+            })
+        }
+
+        return res.status(200).json({
+            data : bike,
+            success : true,
+            message : "Booking fetched successfully!"
+        })
+      
+    } catch(error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.log("Error during getting single Booking",  message); 
+        res.status(500).json(
+            {
+                success : false,
+                error : "Internal server error"
+            })
+        
+    }
+}
+
+
+export const cancel_booking = async (req : Request,res : Response) => {
+
+    try {
+
+        const id = Number(req.params.id)
+
+        const existingBooking = await prisma.booking.findFirst({
+            where : {
+                id,
+                
+                status : "PENDING"
+                
+                
+            }
+        })
+
+        if (!existingBooking) {
+            return res.status(400).json({
+                success : false,
+                error : "Booking already cancelled"
+            })
+        }
+   
+        const bike = await prisma.booking.update({
+
+            where : {
+                id
+            },
+            data : {
+                status : "CANCELLED"
+            }
+        })
+
+        if (!bike) {
+            return res.status(400).json({
+                success : false,
+                error : "No such Booking"
+            })
+        }
+
+        
+
+        return res.status(200).json({
+            data : bike,
+            success : true,
+            message : "Booking cancelled successfully!"
+        })
+      
+    } catch(error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        console.log("Error during getting single Booking",  message); 
         res.status(500).json(
             {
                 success : false,

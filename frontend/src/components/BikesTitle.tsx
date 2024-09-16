@@ -23,7 +23,7 @@ export const BikesTitle = () => {
     // console.log(postInputs);
     
 
-    return <div className="bg-green-300 max-w-7xl mx-auto items-center justify-center grid grid-cols-1 lg:grid-cols-4 gap-4 p-6">
+    return <div className="mx-auto container mt-4 flex p-6 gap-5">
             {/* <div >
                 <StartDatePicker onChange={(date : Date) => {
                     setpostInputs(c => ({

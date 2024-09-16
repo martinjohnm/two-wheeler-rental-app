@@ -31,7 +31,7 @@ export const useGetBikesByFilter = () => {
            
                 setBikesState(responseData.data)
                 setLoading(false);
-                setBikesState(responseData.data)
+                
                 
               }
               setLoading(false)

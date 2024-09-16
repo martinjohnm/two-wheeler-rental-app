@@ -20,6 +20,9 @@ export const CURRENT_USER   =  {url : baseUserUrl + "/auth/current-user", method
 export const GET_ALL_BIKES  =  {url : baseUserUrl + "/bikes/get-bikes", method : "GET"}
 export const GET_ALL_BIKES_BY_FILTER  =  {url : baseUserUrl + "/bikes/get-bikes-by-filter", method : "POST"}
 export const GET_ALL_BIKES_BY_DATE_RANGE  =  {url : baseUserUrl + "/bikes/get-bikes-by-date_range", method : "POST"}
+export const GET_ALL_BIKES_BY_DATE  =  {url : baseUserUrl + "/bikes/get-bikes-by-date", method : "GET"}
+export const GET_SINGLE_BIKE_BY_DATE  =  {url : baseUserUrl + "/bikes/get-single-bike-by-date", method : "GET"}
+
 // === location ==
 export const GET_ALL_LOCATION = {url : baseUserUrl + "/location/get-locations", method : "GET"}
 export const GET_ALL_COMPANIES = {url : baseUserUrl + "/bikes/get-companies", method : "GET"}
