@@ -31,8 +31,6 @@ export const useGetSingleBikeByDate = ({startTimeParam, endTimeParam, locationId
               const responseData = await response.json()
               if (responseData.success) {
                 
-                console.log(responseData.data);
-
                 setBikeForBooking(responseData.data)
                 
               }

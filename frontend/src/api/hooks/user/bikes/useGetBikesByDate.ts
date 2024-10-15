@@ -9,6 +9,7 @@ export const useGetBikesByDate = ({startTimeParam, endTimeParam, locationIdParam
 
   const urlParam = GET_ALL_BIKES_BY_DATE.url
 
+
   const url = TimewiseUrlCreater({startTimeParam, endTimeParam, companyIdParam, locationIdParam, urlParam})
   
     const [loading, setLoading] = useState<boolean>(true);

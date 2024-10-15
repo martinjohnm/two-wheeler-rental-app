@@ -20,9 +20,7 @@ export const Navbar = ({user} : {user : User | null}) => {
     <span className="text-2xl text-gray-900 font-semibold">Rebike</span>
     <div className="flex space-x-4 text-gray-900 gap-4 items-center">
       <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/home"}>Home</Link>
-      {/* <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/bikes"}>Bikes</Link>
-      <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/book"}>Book-Now</Link>
-       */}
+      <Link className="font-mono hover:font-semibold hover:text-blue-700 hover:underline" to={"/bookings"}>Bookings</Link>
       {user ? (
         <button onClick={logout} className="font-mono hover:font-semibold hover:text-blue-700 hover:underline">Logout</button>
       ) : (

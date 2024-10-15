@@ -5,10 +5,6 @@ import { useGetSingleBikeByDate } from "../../api/hooks/user/bikes/useGetSingleB
 import { useEffect } from "react"
 
 
-
-
-
-
 export const BookingSection = () => {
 
 

@@ -1,13 +1,16 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { TimeDiff } from "../../utils/time/Timediff";
 import { bikeForBooking } from "../../store/atoms";
 
-
-
-
+// @ts-ignore
+import heelinnnsfTest from "../../utils/test.js"
 
 export const CheckOutBox = () => {
+
+
+    const navi = useNavigate()
+    
     const bike = useRecoilValue(bikeForBooking)
 
     const location = useLocation();
@@ -20,11 +23,21 @@ export const CheckOutBox = () => {
     const endTime = new Date( String(endTimeParam))
     const TimeDffnce = TimeDiff(endTime, startTime)
 
+    const params = useParams()
+
+    
+
     const Total_amount_to_pay = (Math.round(Number(bike?.price) * TimeDffnce.totalHours * 0.14)*2) + (Number(bike?.price) * TimeDffnce.totalHours)
+
+    const  handleBooking = async () => {
+        navi(`/checkout/?startTime=${startTimeParam}&endTime=${endTimeParam}&bikeId=${params.id}&amount=${Total_amount_to_pay}`)
+    }
+
+
 
     return <div className="w-full shadow-stone-600 shadow rounded-2xl bg-[#ffffff]">
         <div className="lg:col-span-1 p-4">
-            <p className="font-semibold font-mono text-2xl">CHECKOUT</p>
+            <p className="font-semibold font-mono text-2xl">BOOKING SUMMARY</p>
         </div>
         <Fee_Amount_btween text={"Booking Fee"} amount={Number(bike?.price) * TimeDffnce.totalHours } />
         <Fee_Amount_btween text={"CGST (14%)"} amount={Math.round(Number(bike?.price) * TimeDffnce.totalHours * 0.14) } />
@@ -35,11 +48,11 @@ export const CheckOutBox = () => {
                 <p>Total Payable Amount</p>
             </div>
             <div>
-                <p>₹ {Total_amount_to_pay}</p>
+                <p>$ {Total_amount_to_pay}</p>
             </div>
         </div>
         <div className="w-full p-4">
-            <button className="w-full p-3 rounded-2xl bg-yellow-400 hover:shadow hover:shadow-stone-600 cursor-pointer">Make Payment</button>
+            <button  onClick={handleBooking} className="w-full p-3 rounded-2xl bg-yellow-400 hover:shadow hover:shadow-stone-600 cursor-pointer">Book Now</button>
         </div>
     </div>
 }
@@ -55,7 +68,8 @@ const Fee_Amount_btween = ({text, amount} : {text: string, amount: number}) => {
                 <p>{text}</p>
             </div>
             <div>
-                <p>₹ {amount}</p>
+                <p>$ {amount}</p>
             </div>
         </div>
 }
+

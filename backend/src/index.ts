@@ -12,6 +12,7 @@ import locationRoutes from "./routes/user/location"
 import bikesadminRoutes from "./routes/admin/bikes"
 import adminAuthRoutes from "./routes/admin/auth"
 import locationAdminROutes  from "./routes/admin/location"
+import Razorpay from "razorpay";
 
 dotenv.config();
 
@@ -29,6 +30,11 @@ app.use(cors({
     credentials : true,
 }))
 app.use(cookieParser())
+
+const razorpay = new Razorpay({
+    key_id : String(process.env.RAZORPAY_KEY),
+    key_secret : String(process.env.RAZORPAY_KEY_SECRET)
+})
 // user routes
 app.use("/api/user/auth", authRoutes)
 app.use("/api/user/bikes", bikesUserRoutes)
@@ -45,3 +51,4 @@ app.listen(PORT, () => {
     console.log(`App running on ${PORT}`);
     
 })
+

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { Bike, BikeQueryType, BikesQuery, Company, FilteredBikes, Location, User } from "../utils/types";
+import { Bike, BikeQueryType, BikesQuery, Booking, Company, FilteredBikes, Location, User } from "../utils/types";
 
 
 
@@ -64,4 +64,9 @@ export const endDateAtom = atom<Date | null>({
     default : null
 })
 
+
+export const bookingsAtom = atom<Booking[] | null>({
+    key : "bookingsAtom",
+    default : null
+})
 

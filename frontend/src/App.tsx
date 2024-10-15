@@ -12,6 +12,10 @@ import { AvailableBikes } from './pages/AvailableBikes'
 import { useGetCompanies } from './api/hooks/user/bikes/useGetCompanies'
 import { useGetLocations } from './api/hooks/user/location/useGetLocation'
 import { BookingPage } from './pages/BookingPage'
+import { OrderSummry } from './pages/OrderSummary'
+import { TotalBooking } from './pages/TotalBookings'
+import { CheckOutPage } from './pages/CheckOutPage'
+import { PaymentSuccess } from './pages/PaymentSuccess'
 
 
 function App() {
@@ -70,6 +74,35 @@ function App() {
               </AuthorizeUser>
             } 
             />
+            <Route path={`/checkout`} element={
+              <AuthorizeUser>
+                <CheckOutPage/>
+              </AuthorizeUser>
+            } 
+            />
+
+            <Route path={`/order-summary`} element={
+              <AuthorizeUser>
+                <OrderSummry/>
+              </AuthorizeUser>
+            } 
+            />
+
+            <Route path={`/payment-success`} element={
+              <AuthorizeUser>
+                <PaymentSuccess/>
+              </AuthorizeUser>
+            } 
+            />
+
+            <Route path={`/bookings`} element={
+              <AuthorizeUser>
+                <TotalBooking/>
+              </AuthorizeUser>
+            } 
+            />
+
+            
             {/* <Route path='/bikes' element={
               <AuthorizeUser>
                 <Bikes/>

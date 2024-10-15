@@ -83,7 +83,7 @@ export const BookingSummary = () => {
                         <p>{bike?.price} per hour for {TimeDffnce.totalHours} Hours</p>
                     </div>
                     <div>
-                        <p>₹ {Number(bike?.price) * TimeDffnce.totalHours }</p>
+                        <p>$ {Number(bike?.price) * TimeDffnce.totalHours }</p>
                     </div>
                 </div>
                 <div className="flex justify-between mt-2 font-bold text-xl">
@@ -91,11 +91,11 @@ export const BookingSummary = () => {
                         <p>Total :</p>
                     </div>
                     <div>
-                        <p>₹ {Number(bike?.price) * TimeDffnce.totalHours }</p>
+                        <p>$ {Number(bike?.price) * TimeDffnce.totalHours }</p>
                     </div>
                 </div>
 
-                <div className="flex justify-between mt-2 text-sm">
+                {/* <div className="flex justify-between mt-2 text-sm">
                     <div>
                         <div>
                             <p>Km Limit (?)</p>
@@ -109,11 +109,11 @@ export const BookingSummary = () => {
                             <p>196 Km</p>
                         </div>
                         <div>
-                            <p>₹ 10/Km</p>
+                            <p>$ 10/Km</p>
                         </div>
 
                     </div>
-                </div>
+                </div> */}
             </div>
     </div>
 

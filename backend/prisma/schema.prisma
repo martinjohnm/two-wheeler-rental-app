@@ -62,8 +62,10 @@ model Location {
 
 model Booking {
   id         Int   @id @default(autoincrement())
+  paymentId  String
   userId     Int
   bikeId     Int
+  amount     Float
   startTime  DateTime
   endTime    DateTime
   status     BookingStatus
@@ -71,7 +73,7 @@ model Booking {
   updatedAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id])
   bike       Bike     @relation(fields: [bikeId], references: [id])
-  order      Order?
+  // order      Order?
 }
 
 model Order {
@@ -83,7 +85,7 @@ model Order {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id])
-  booking    Booking  @relation(fields: [bookingId], references: [id])
+  // booking    Booking  @relation(fields: [bookingId], references: [id])
 }
 
 
@@ -91,6 +93,7 @@ enum BookingStatus {
   PENDING
   CONFIRMED
   CANCELLED
+  
 }
 
 enum OrderStatus {

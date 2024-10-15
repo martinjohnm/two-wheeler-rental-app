@@ -2,7 +2,7 @@
 
 
 
-export const TimewiseUrlCreater = ({startTimeParam, endTimeParam, locationIdParam, companyIdParam, urlParam} : {startTimeParam : string, endTimeParam : string, locationIdParam : number | undefined, companyIdParam : number | undefined, urlParam : string}) => {
+export const TimewiseUrlCreater = ({startTimeParam, endTimeParam, locationIdParam, companyIdParam, urlParam} : {startTimeParam? : string, endTimeParam? : string, locationIdParam? : number | undefined, companyIdParam? : number | undefined, urlParam? : string}) => {
     
     
     

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 
 
-export const BikesCard = ({id,title, model ,price, image, company, startTime, endTime, startDate, endDate, duration, startTimeParam, endTimeParam, locationIdParam, companyIdParam} : {id: number,title : string, price : number, image : string, model : number, company : string, startTime : String, endTime : String, startDate : String, endDate : String, duration : string, startTimeParam : string, endTimeParam : string, locationIdParam : number | undefined, companyIdParam : number | undefined}) => {
+export const BikesCard = ({id,title, model ,price, image, company, startTime, endTime, startDate, endDate, duration, startTimeParam, endTimeParam, locationIdParam, companyIdParam} : {id: number,title : String, price : number, image : String, model : number, company : String, startTime? : String, endTime? : String, startDate? : String, endDate ?: String, duration ?: String, startTimeParam ?: String, endTimeParam ?: String, locationIdParam ?: number | undefined, companyIdParam ?: number | undefined}) => {
 
     
     return <div className="items-center p-4 justify-center rounded-xl shadow-2xl bg-white">
@@ -14,7 +14,7 @@ export const BikesCard = ({id,title, model ,price, image, company, startTime, en
             
         </div>
         <div className="mt-4">
-            <img className="h-[80%] w-[80%] mx-auto container" src={image} alt="" />
+            <img className="h-[80%] w-[80%] mx-auto container" src={String(image)} alt="" />
         </div>
         
         <hr className="w-full h-1 mt-2 bg-gray-100 border-0 rounded dark:bg-gray-700" />

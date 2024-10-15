@@ -72,3 +72,19 @@ export interface DateQueryType {
     startDate : Date | null
     endDate : Date | null
 }
+
+export interface Booking {
+    id : number,
+    userId: number,
+    bikeId: number,
+    startTime: Date,
+    endTime: Date,
+    status: String,
+    createdAt: Date,
+    updatedAt: Date,
+    amount : Number,
+    user : User,
+    bike : Bike,
+
+}
+     

@@ -3,7 +3,7 @@ import { BACKEND_URL } from "./config"
 
 
 
-const backend_url = import.meta.env.BACKEND_URL
+// const backend_url = import.meta.env.BACKEND_URL
 
 
 export const baseUserUrl = `${BACKEND_URL}/api/user`
@@ -22,6 +22,12 @@ export const GET_ALL_BIKES_BY_FILTER  =  {url : baseUserUrl + "/bikes/get-bikes-
 export const GET_ALL_BIKES_BY_DATE_RANGE  =  {url : baseUserUrl + "/bikes/get-bikes-by-date_range", method : "POST"}
 export const GET_ALL_BIKES_BY_DATE  =  {url : baseUserUrl + "/bikes/get-bikes-by-date", method : "GET"}
 export const GET_SINGLE_BIKE_BY_DATE  =  {url : baseUserUrl + "/bikes/get-single-bike-by-date", method : "GET"}
+
+// === bOOKING ====
+export const CREATE_BOOKING = {url : baseUserUrl + "/booking/create", method : "POST"}
+export const CREATE_BOOKING_INTENT = {url : baseUserUrl + "/booking/create-booking-intent", method : "POST"}
+export const GET_BOOKINGS_BY_USER = {url : baseUserUrl + "/booking/get-by-user", method : "GET"}
+export const CANCEL_BOOKING = {url : baseUserUrl + "/booking/cancel", method : "POST"}
 
 // === location ==
 export const GET_ALL_LOCATION = {url : baseUserUrl + "/location/get-locations", method : "GET"}

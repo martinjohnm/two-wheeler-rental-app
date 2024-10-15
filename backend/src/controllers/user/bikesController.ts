@@ -293,13 +293,6 @@ export const get_bikes_by_date_range_by_params = async (req : Request,res : Resp
         const locationId = req.query.locationId
         const companyId = req.query.companyId
 
-        console.log(new Date(startTimeFromUser).getDate(), new Date(startTimeFromUser).getMonth(), new Date(startTimeFromUser).getFullYear(),
-        new Date(startTimeFromUser).getHours(), new Date(startTimeFromUser).getMinutes());
-
-
-        console.log(new Date(endTimeFromUser).getDate(), new Date(endTimeFromUser).getMonth(), new Date(endTimeFromUser).getFullYear(),
-        new Date(endTimeFromUser).getHours(), new Date(endTimeFromUser).getMinutes());
-
         if (!startTimeFromUser || !endTimeFromUser) {
 
             return res.status(400).json({
