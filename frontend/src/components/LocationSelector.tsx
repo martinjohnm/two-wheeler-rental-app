@@ -23,9 +23,8 @@ export const LocationSelector = ({onChange} : {onChange : any}) => {
   })
 
   const handleChange = (option : any) => {
-    setSelectedOption(option);  // Store the selected option in the state
+    setSelectedOption(option);
     {option ? onChange(option.value) : null}
-    // console.log('Selected option:', option);  // Log the selected option
   };
 
   useEffect(() => {

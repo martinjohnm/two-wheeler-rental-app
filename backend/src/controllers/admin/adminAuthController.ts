@@ -106,7 +106,7 @@ export const login = async (req : Request, res : Response) => {
             return res.status(400).json(
                 {
                     success : false,
-                    error : "Only admin can login"
+                    message : "Only admin can login"
                 })
         }
         const isPasswordCorrect = await bcrypt.compare(password , user?.password || "")
@@ -115,7 +115,7 @@ export const login = async (req : Request, res : Response) => {
             return res.status(400).json(
             {
                 success : false,
-                error : "Invalid credentials"
+                message : "Invalid credentials"
             })
         }
 

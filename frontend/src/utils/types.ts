@@ -19,6 +19,7 @@ export interface Bike {
     title : string,
     updatedAt : Date,
     company : Comapny
+    location : Location
 }
 
 export interface FilteredBikes {
@@ -68,6 +69,15 @@ export interface BikeQueryType {
     locationId? : number
 }
 
+export interface NewBike {
+    title? : String | undefined ,
+    image? : String | undefined,
+    price? : Number | undefined,
+    model? : Number | undefined,
+    companyId? : number | undefined
+    locationId? : number | undefined
+}
+
 export interface DateQueryType {
     startDate : Date | null
     endDate : Date | null
@@ -85,6 +95,21 @@ export interface Booking {
     amount : Number,
     user : User,
     bike : Bike,
+    paymentId : String
+}
 
+export interface BookingAdmin {
+    id : number,
+    userId: number,
+    bikeId: number,
+    startTime: Date,
+    endTime: Date,
+    status: String,
+    createdAt: Date,
+    updatedAt: Date,
+    amount : Number,
+    user : User,
+    bike : Bike,
+    paymentId : String
 }
      

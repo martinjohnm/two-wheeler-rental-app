@@ -11,7 +11,7 @@ interface Option {
   label : string
 }
 
-export const CompanySelector = ({onChange} : {onChange : any}) => {
+export const CompanySelector = ({onChange} : {onChange? : any}) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
   useGetCompanies()

@@ -5,7 +5,7 @@ import { ADMIN_TOKEN } from "../utils/config";
 export  function AuthorizeAdmin({children} : {children : ReactNode}){
     const token=localStorage.getItem(ADMIN_TOKEN);
 
-    if(!token) return <Navigate to={'/admin-login'}/>
+    if(!token) return <Navigate to={'/'}/>
 
     return children
 }
@@ -13,7 +13,7 @@ export  function AuthorizeAdmin({children} : {children : ReactNode}){
 export const ProtectAdmin = ({children} : {children : ReactNode} )  => {
     const token=localStorage.getItem(ADMIN_TOKEN);
 
-    if(token) return <Navigate to={"/admin"}/>
+    if(token) return <Navigate to={"/admin-dashboard"}/>
 
     return children;
 }

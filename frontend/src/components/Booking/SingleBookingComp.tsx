@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { TimeDiff } from "../../utils/time/Timediff"
 import { DateObjConverrer } from "../../utils/time/TimeRange"
 import { useCancelBooking } from "../../api/hooks/user/booking/useCancelBooking"
@@ -33,7 +33,7 @@ export const SingleBookingComp = ({image, title, model, startTimee, endTimee, pr
     return <div className=" p-6 px-10 border-t-2 flex items-center justify-center">
         
            
-            <div className="max-w-6xl grid grid-cols-1 md:grid-cols-4 gap-4 shadow-stone-600 shadow rounded-2xl bg-[#ffffff] p-6">
+            <div className="max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-4 shadow-stone-600 shadow rounded-2xl bg-[#ffffff] p-6">
                 <div className="col-span-1">
                     <div className="flex gap-4 items-center justify-center">
                         <p className="font-bold text-lg"> {title}</p>

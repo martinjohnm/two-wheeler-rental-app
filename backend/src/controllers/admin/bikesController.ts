@@ -12,17 +12,6 @@ export const add_bike = async (req : Request,res : Response) => {
         const locationId = req.query.locationId
 
         const body = req.body
-        const response = bikeAddInput.safeParse(body);
-        if (!response.success) {
-            res.status(400).json({
-                error : response.error,
-                success : false,
-                message : "Bike adding failed"
-            })
-            return
-        }
-
-
         if (body.image) {
             const imagee = "/home/martin-john-m/Videos/aaaadevssprojeccts/two-wheeler-app-node/backend/src/media/r15.png"
             const test = await uploadImage(body.image)
@@ -32,12 +21,15 @@ export const add_bike = async (req : Request,res : Response) => {
       
         const bike = await prisma.bike.create({
             data : {
-                ...body,
+                image : req.body.image,
+                title : req.body.title,
+                price : req.body.price,
+                model : req.body.model,
                 company : {
-                    connect : {id : Number(companyId)}
+                    connect : {id : Number(req.body.companyId)}
                 },
                 location : {
-                    connect : {id : Number(locationId)}
+                    connect : {id : Number(req.body.locationId)}
                 }
             }
         })
@@ -56,7 +48,7 @@ export const add_bike = async (req : Request,res : Response) => {
         res.status(500).json(
             {
                 success : false,
-                error : "Internal server error"
+                message : "Internal server error"
             })
         
     }

@@ -1,10 +1,15 @@
 import { atom } from "recoil";
-import { Bike, BikeQueryType, BikesQuery, Booking, Company, FilteredBikes, Location, User } from "../utils/types";
+import { Bike, BikeQueryType, BikesQuery, Booking, BookingAdmin, Company, FilteredBikes, Location, NewBike, User } from "../utils/types";
 
 
 
 export const userAtom = atom<User | null>({
     key : "user",
+    default : null
+})
+
+export const adminAtom = atom<User | null>({
+    key : "admin",
     default : null
 })
 
@@ -15,6 +20,11 @@ export const bikeForBooking = atom<Bike | null>({
 
 export const bikesAtom = atom<Bike[] | null>({
     key : "bikes",
+    default : null
+})
+
+export const newBikeAtom = atom<NewBike | null>({
+    key : "newBikeAdd",
     default : null
 })
 
@@ -44,6 +54,16 @@ export const BikesQueryAtom = atom<BikesQuery>({
     }
 })
 
+export const AddBikeBoolean = atom<Boolean> ({
+    key : "bikeAddBoolean",
+    default : false
+})
+
+export const AddLocationBoolean = atom<Boolean> ({
+    key : "addLocationBoolean",
+    default : false
+})
+
 
 export const datePickerAtom = atom<BikeQueryType>({
     key : "datePickerAtom",
@@ -70,3 +90,28 @@ export const bookingsAtom = atom<Booking[] | null>({
     default : null
 })
 
+export const bookingsAdminAtom = atom<BookingAdmin[] | null>({
+    key : "bookingsAdminAtom",
+    default : null
+})
+
+
+export const AdminSideBarOpen = atom<Boolean>({
+    key : "sdminSideBarOpenAtom",
+    default : false
+})
+
+
+// Admin Users 
+
+export const userssAdminAtom = atom<User[] | null>({
+    key : "userssAdminAtom",
+    default : null
+})
+
+
+
+export const locationsAdmin = atom<Location[] | null>({
+    key : "locationAdmin",
+    default : null
+})

@@ -363,7 +363,13 @@ export const get_booking_bulk = async (req : Request,res : Response) => {
         const bike = await prisma.booking.findMany({
             include : {
                 user : true,
-                bike : true
+                bike : {
+                    include : {
+                        company : true,
+                        location : true
+                    }
+                },
+                
             }
         })
 

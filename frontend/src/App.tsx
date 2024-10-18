@@ -16,6 +16,13 @@ import { OrderSummry } from './pages/OrderSummary'
 import { TotalBooking } from './pages/TotalBookings'
 import { CheckOutPage } from './pages/CheckOutPage'
 import { PaymentSuccess } from './pages/PaymentSuccess'
+import { Dashboard } from './pages/admin/Dashboard'
+import { Bookings } from './pages/admin/Bookings'
+import { Bikes } from './pages/admin/Bikes'
+import { AdminLogin } from './pages/admin/AdminLogin'
+import { AuthorizeAdmin, ProtectAdmin } from './protected/AuthAdmin'
+import { Location } from './pages/admin/Location'
+import { Users } from './pages/admin/Users'
 
 
 function App() {
@@ -102,19 +109,47 @@ function App() {
             } 
             />
 
-            
-            {/* <Route path='/bikes' element={
-              <AuthorizeUser>
-                <Bikes/>
-              </AuthorizeUser>
+
+            {/* Admin Routes */}
+
+
+            <Route path='/admin-login' element={
+              <ProtectAdmin>
+                <AdminLogin/>
+              </ProtectAdmin>} 
+            />
+            <Route path={`/admin-dashboard`} element={
+              <AuthorizeAdmin>
+                <Dashboard/>
+              </AuthorizeAdmin>
             } 
             />
-            <Route path='/bike/:id' element={
-              <AuthorizeUser>
-                <Bike/>
-              </AuthorizeUser>
+            <Route path={`/admin-bookings`} element={
+              <AuthorizeAdmin>
+                <Bookings/>
+              </AuthorizeAdmin>
             } 
-            /> */}
+            />
+
+            <Route path={`/admin-bikes`} element={
+              <AuthorizeAdmin>
+                <Bikes/>
+              </AuthorizeAdmin>
+            } 
+            />
+
+            <Route path={`/admin-locations`} element={
+              <AuthorizeAdmin>
+                <Location/>
+              </AuthorizeAdmin>
+            } 
+            />
+            <Route path={`/admin-users`} element={
+              <AuthorizeAdmin>
+                <Users/>
+              </AuthorizeAdmin>
+            } 
+            />
       
       </Routes>
     </BrowserRouter>

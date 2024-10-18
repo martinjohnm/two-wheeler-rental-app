@@ -12,6 +12,9 @@ import locationRoutes from "./routes/user/location"
 import bikesadminRoutes from "./routes/admin/bikes"
 import adminAuthRoutes from "./routes/admin/auth"
 import locationAdminROutes  from "./routes/admin/location"
+import bookingAdminnRoutes from "./routes/admin/booking"
+import userAdminnRoutes from "./routes/admin/user"
+
 import Razorpay from "razorpay";
 
 dotenv.config();
@@ -44,7 +47,9 @@ app.use("/api/user/booking/", bookingRoutes)
 // admin routes
 app.use("/api/admin/auth", adminAuthRoutes)
 app.use("/api/admin/bikes", bikesadminRoutes)
-app.use("/api/admin/location/:id", locationAdminROutes)
+app.use("/api/admin/location", locationAdminROutes)
+app.use("/api/admin/booking", bookingAdminnRoutes)
+app.use("/api/admin/users", userAdminnRoutes)
 
 app.listen(PORT, () => {
 
