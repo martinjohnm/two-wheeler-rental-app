@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { userAtom } from "../../../../store/atoms";
 import { LOGOUT_USER } from "../../../../utils/urls";
 import { USER_TOKEN } from "../../../../utils/config";
+import { toast } from "sonner";
 
 
 
@@ -29,6 +30,7 @@ export const useUserLogout = () => {
 
                 setUserState(null)
                 localStorage.removeItem(USER_TOKEN)
+                toast.success(responseData.message)
                 setLoading(false);
                 navigate("/")
                 
