@@ -24,22 +24,7 @@ export const BikesTitle = () => {
     
 
     return <div className="mx-auto container mt-4 flex p-6 gap-5">
-            {/* <div >
-                <StartDatePicker onChange={(date : Date) => {
-                    setpostInputs(c => ({
-                        ...c, 
-                        startDate : date
-                    })) 
-                }} placeholder="Select start date"/>
-            </div>
-            <div >
-                <EndDatePicker onChange={(date : Date) => {
-                    setpostInputs(c => ({
-                        ...c, 
-                        endDate : date
-                    })) 
-                }} placeholder="Select end date"/>
-            </div> */}
+          
             <div >
                 <CompanySelector onChange={(companyId : number) => {
                     setpostInputs(c => ({

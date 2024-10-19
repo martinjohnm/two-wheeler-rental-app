@@ -5,10 +5,6 @@ export const Landing = () => {
 
 
     return <div className="bg-[url('bgimage.png')] bg-no-repeat bg-cover h-screen py-40">
-{/*     
-        <Navbar user={user}/>
-        <DateFilterForm/>
-     */}
 
      <div className="mx-auto container flex justify-center items-center">
             <p className="font-bold text-4xl">Welcome to Rebike</p>

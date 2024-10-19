@@ -17,8 +17,6 @@ export const BookingSummary = () => {
  
     const startTimeParam = String(searchParams.get("startTime"))
     const endTimeParam   = String(searchParams.get("endTime"))
-    // const companyIdParam = Number(searchParams.get("companyId"))
-    // const locationIdParam     = Number(searchParams.get("locationId"))
 
 
     const startTime = new Date( String(startTimeParam))
